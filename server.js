@@ -5,6 +5,8 @@ require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
 
+require('./config/database')();
+
 const app = express();
 
 app.use(bodyParser.urlencoded({ extended: true }));
