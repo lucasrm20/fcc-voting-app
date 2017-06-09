@@ -1,0 +1,23 @@
+{
+  "name": "fcc-voting-app",
+  "version": "1.0.0",
+  "description": "FreeCodeCamp challenge to build a voting app ",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lucas-fcc/fcc-voting-app.git"
+  },
+  "author": "Lucas Rodrigues Moura",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/lucas-fcc/fcc-voting-app/issues"
+  },
+  "homepage": "https://github.com/lucas-fcc/fcc-voting-app#readme",
+  "dependencies": {
+    "dotenv": "^4.0.0",
+    "express": "^4.15.3"
+  }
+}
