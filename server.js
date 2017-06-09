@@ -6,8 +6,12 @@ const express = require('express');
 
 const app = express();
 
+app.set('view engine', 'ejs');
+app.use(express.static('public'));
+
+// ROUTES
 app.get('/', (req, res) => {
-    res.send('App running');
+    res.render('home');
 });
 
 const listener = app.listen(process.env.PORT, () => {
