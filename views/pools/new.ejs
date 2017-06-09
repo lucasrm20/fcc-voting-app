@@ -1,9 +1,47 @@
 <% include ../partials/header %>
 
 <div class="container">
-    
+
     <div class="row">
-        <h1 class="text-center">New Poll</h1>
+        <div class="col-md-4 col-md-offset-4">
+
+            <h1 class="text-center">New Poll</h1>
+            <hr>
+        
+            <form action="/pools" method="post">
+                <div class="form-group">
+                    <label for="title">Pool Tittle</label>
+                    <input id="title"
+                        type="text"
+                        name="pool[title]"
+                        class="form-control"
+                        placeholder="Poll Title">
+                </div>
+
+                <div class="form-group">
+                    <label for="options">Poll Options</label>
+                    <input id="options"
+                        type="text"
+                        name="pool[options][]"
+                        class="form-control"
+                        placeholder="Option">
+
+                    <input type="text"
+                        name="pool[options][]"
+                        class="form-control extra-option"
+                        placeholder="Option">
+
+                    <div class="text-center">
+                        <button type="button" class="btn btn-sm btn-default">Add More Options</button>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" class="btn btn-lg btn-primary btn-block">Submit</button>
+                </div>
+            </form>
+        
+        </div>
     </div>
 
 </div>
