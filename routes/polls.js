@@ -10,6 +10,9 @@ router.get('/new', (req, res) => {
 });
 
 router.route('/')
+    .get((req, res) => {
+        res.render('polls/all');
+    })
     .post((req, res) => {
 
         const newPoll = req.body.poll;
