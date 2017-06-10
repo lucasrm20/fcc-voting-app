@@ -18,9 +18,13 @@ router.route('/')
     .post(auth.isLoggedIn, (req, res) => {
 
         const newPoll = req.body.poll;
+        
         newPoll.options = newPoll.options.map(option => {
             return { description: option };
         });
+
+        newPoll.author = req.user;
+
 
         Poll.create(newPoll)
             .then(poll => res.redirect(`/polls/${poll._id}`))
@@ -32,6 +36,8 @@ router.route('/:pollId')
     .get((req, res) => {
 
         Poll.findById(req.params.pollId)
+            .populate('author')
+            .exec()
             .then(poll => res.render('polls/show', { poll }))
             .catch(err => res.json(err));
     

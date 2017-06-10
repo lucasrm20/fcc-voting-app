@@ -14,7 +14,11 @@ const pollSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    options: [optionSchema]
+    options: [optionSchema],
+    author: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+    }
 });
 
 module.exports = mongoose.model('Poll', pollSchema);
