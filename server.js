@@ -18,7 +18,7 @@ app.get('/', (req, res) => {
     res.render('home');
 });
 
-app.use('/pools', require('./routes/pools'));
+app.use('/polls', require('./routes/polls'));
 
 const listener = app.listen(process.env.PORT, () => {
     console.log(`Server running on port ${listener.address().port}`);

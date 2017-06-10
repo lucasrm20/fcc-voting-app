@@ -8,31 +8,36 @@
             <h1 class="text-center">New Poll</h1>
             <hr>
         
-            <form action="/pools" method="post">
+            <form action="/polls" method="post">
                 <div class="form-group">
                     <label for="title">Pool Tittle</label>
                     <input id="title"
                         type="text"
-                        name="pool[title]"
+                        name="poll[title]"
                         class="form-control"
-                        placeholder="Poll Title">
+                        placeholder="Poll Title"
+                        required>
                 </div>
 
                 <div class="form-group">
                     <label for="options">Poll Options</label>
                     <input id="options"
                         type="text"
-                        name="pool[options][]"
+                        name="poll[options][]"
                         class="form-control"
-                        placeholder="Option">
+                        placeholder="First Option"
+                        required>
 
-                    <input type="text"
-                        name="pool[options][]"
-                        class="form-control extra-option"
-                        placeholder="Option">
+                    <div class="extra-option">
+                        <input type="text"
+                            name="poll[options][]"
+                            class="form-control"
+                            placeholder="Second Option"
+                            required>
+                    </div>
 
                     <div class="text-center">
-                        <button type="button" class="btn btn-sm btn-default">Add More Options</button>
+                        <button id="more-options" type="button" class="btn btn-sm btn-default">Add More Options</button>
                     </div>
                 </div>
 
