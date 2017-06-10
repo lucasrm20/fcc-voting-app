@@ -3,9 +3,11 @@
 const express = require('express');
 const router = express.Router();
 
+const auth = require('./../middlewares/auth');
+
 const Poll = require('./../models/poll');
 
-router.get('/new', (req, res) => {
+router.get('/new', auth.isLoggedIn, (req, res) => {
     res.render('polls/new');
 });
 
@@ -13,7 +15,7 @@ router.route('/')
     .get((req, res) => {
         res.render('polls/all');
     })
-    .post((req, res) => {
+    .post(auth.isLoggedIn, (req, res) => {
 
         const newPoll = req.body.poll;
         newPoll.options = newPoll.options.map(option => {
