@@ -16,10 +16,10 @@
             <h2 class="text-center">Vote</h2>
             <hr>
 
-            <form>
+            <form action="/polls/<%= poll._id %>/vote" method="post">
                 <div class="form-group">
-                    <select class="form-control input-lg" required>
-                        <option value="" disabled="disabled" selected="selected" hidden="">Choose an option... </option>
+                    <select class="form-control input-lg" name="vote" required>
+                        <option value="" disabled="disabled" selected="selected" hidden>Choose an option... </option>
                         <% poll.options.forEach(option => { %>
                             <option value="<%= option._id %>"><%= option.description %></option>
                         <% });%>
@@ -38,6 +38,9 @@
             <h2 class="text-center">Results</h2>
             <hr>
         
+            <% poll.options.forEach(option => { %>
+                <p><%= option.description %> - <%= option.votes.length %></p>
+            <% }); %>
             <!-- chart goes here -->
         
         </div>
