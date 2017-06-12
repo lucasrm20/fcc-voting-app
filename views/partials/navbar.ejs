@@ -29,11 +29,25 @@
                         <a href="/auth/register">Sign Up</a>
                     </li>
                 <% } else { %>
-                    <li>
-                        <a>Hello <%= loggedUser.username %></a>
-                    </li>
-                    <li>
-                        <a href="/auth/Logout">Logout</a>
+                    <li class="dropdown">
+                        <a href="#"
+                            class="dropdown-toggle"
+                            data-toggle="dropdown"
+                            role="button"
+                            aria-hashpopup="true"
+                            aria-expanded="false">
+                            Hello <%= loggedUser.username %> <span class="caret"></span>
+                        </a>
+
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="/users/polls">My Polls</a>
+                            </li>
+                            <li role="separator" class="divider"></li>
+                            <li>
+                                <a href="/auth/Logout">Logout</a>
+                            </li>
+                        </ul>
                     </li>
                 <% } %>
             </ul>

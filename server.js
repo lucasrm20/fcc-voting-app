@@ -34,6 +34,7 @@ app.get('/', (req, res) => {
 
 app.use('/polls', require('./routes/polls'));
 app.use('/auth', require('./routes/auth'));
+app.use('/users', require('./routes/users'));
 
 const listener = app.listen(process.env.PORT, () => {
     console.log(`Server running on port ${listener.address().port}`);

@@ -25,7 +25,6 @@ router.route('/')
 
         newPoll.author = req.user;
 
-
         Poll.create(newPoll)
             .then(poll => res.redirect(`/polls/${poll._id}`))
             .catch(err => res.json(err));
