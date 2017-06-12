@@ -9,4 +9,11 @@ function isLoggedIn(req, res, next) {
 
 };
 
-module.exports = { isLoggedIn };
+function provideLoggedUserForTemplates(req, res, next) {
+
+    res.locals.loggedUser = req.user;
+    next();
+
+};
+
+module.exports = { isLoggedIn, provideLoggedUserForTemplates };

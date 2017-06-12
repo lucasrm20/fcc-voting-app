@@ -7,6 +7,8 @@ const bodyParser = require('body-parser');
 const expressSession = require('express-session');
 const passport = require('./config/passport');
 
+const auth = require('./middlewares/auth');
+
 require('./config/database')();
 
 const app = express();
@@ -23,6 +25,7 @@ app.use(expressSession({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(auth.provideLoggedUserForTemplates);
 
 // ROUTES
 app.get('/', (req, res) => {

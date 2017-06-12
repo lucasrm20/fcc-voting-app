@@ -29,4 +29,9 @@ router.route('/login')
     .get((req, res) => res.render('auth/login'))
     .post(passport.authenticate('local', { successRedirect: '/polls', failureRedirect: '/auth/login' }), (req, res) => {});
 
+router.get('/logout', (req, res) => {
+    req.logout();
+    res.redirect('/polls');
+});
+
 module.exports = router;
