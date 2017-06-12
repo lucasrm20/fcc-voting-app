@@ -40,7 +40,35 @@ router.route('/:pollId')
             .then(poll => res.render('polls/show', { poll }))
             .catch(err => res.json(err));
     
+    })
+    .put(auth.checkPollOwnership, (req, res) => {
+
+        let newOptions = req.body.poll.options;
+            
+        newOptions = newOptions.map(option => {
+            return { description: option };
+        });
+
+        Poll.findById(req.params.pollId)
+            .then(poll => {
+                
+                poll.options = poll.options.concat(newOptions);
+                poll.save()
+                    .then(() => res.redirect(`/polls/${poll._id}/edit`))
+                    .catch(err => res.json(err));
+                
+            })
+            .catch(err => res.json(err));
+
     });
+
+router.get('/:pollId/edit', auth.checkPollOwnership, (req, res) => {
+
+    Poll.findById(req.params.pollId)
+        .then(poll => res.render('polls/edit', { poll }))
+        .catch(err => res.json(err));
+
+});
 
 router.post('/:pollId/vote', (req, res) => {
     

@@ -1,5 +1,7 @@
 'use strict';
 
+const Poll = require('./../models/poll');
+
 function isLoggedIn(req, res, next) {
 
     if (req.isAuthenticated())
@@ -16,4 +18,25 @@ function provideLoggedUserForTemplates(req, res, next) {
 
 };
 
-module.exports = { isLoggedIn, provideLoggedUserForTemplates };
+function checkPollOwnership(req, res, next) {
+
+    isLoggedIn(req, res, () => {
+
+        Poll.findById(req.params.pollId, 'author')
+            .then(poll => {
+
+                if (poll.author.equals(req.user._id))
+                    next();
+                else
+                    res.redirect('back');
+
+            })
+            .catch(err => {
+                res.json(err);
+            });
+
+    });
+
+};
+
+module.exports = { isLoggedIn, provideLoggedUserForTemplates, checkPollOwnership };

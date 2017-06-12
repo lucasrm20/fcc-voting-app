@@ -6,6 +6,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const expressSession = require('express-session');
 const passport = require('./config/passport');
+const methodOverride = require('method-override');
 
 const auth = require('./middlewares/auth');
 
@@ -16,6 +17,7 @@ const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.set('view engine', 'ejs');
 app.use(express.static('public'));
+app.use(methodOverride('_method'));
 
 // AUTH
 app.use(expressSession({
