@@ -77,7 +77,7 @@ router.get('/:pollId/edit', auth.checkPollOwnership, (req, res) => {
 
 });
 
-router.post('/:pollId/vote', (req, res) => {
+router.post('/:pollId/vote', auth.isLoggedIn, (req, res) => {
     
     Poll.findById(req.params.pollId)
         .then(poll => {
