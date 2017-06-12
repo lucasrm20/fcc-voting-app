@@ -60,6 +60,13 @@ router.route('/:pollId')
             })
             .catch(err => res.json(err));
 
+    })
+    .delete(auth.checkPollOwnership, (req, res) => {
+
+        Poll.findByIdAndRemove(req.params.pollId)
+            .then(() => res.redirect('back'))
+            .catch(err => res.json(err));
+
     });
 
 router.get('/:pollId/edit', auth.checkPollOwnership, (req, res) => {
