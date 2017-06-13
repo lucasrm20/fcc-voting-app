@@ -13,7 +13,13 @@ router.get('/new', auth.isLoggedIn, (req, res) => {
 
 router.route('/')
     .get((req, res) => {
-        res.render('polls/all');
+
+        Poll.find({})
+            .populate('author')
+            .exec()
+            .then(polls => res.render('polls/all', { polls }))
+            .catch(err => res.json(err));
+
     })
     .post(auth.isLoggedIn, (req, res) => {
 
