@@ -11,5 +11,9 @@
 <!-- OWN JS -->
 <script src="/js/client.js"></script>
 
+<% if(locals.script) { -%>
+    <%- include(`../scripts/${script}`) %>
+<% } -%>
+
 </body>
 </html>

@@ -43,7 +43,12 @@ router.route('/:pollId')
         Poll.findById(req.params.pollId)
             .populate('author')
             .exec()
-            .then(poll => res.render('polls/show', { poll }))
+            .then(poll => {
+                res.format({
+                    'text/html': () => res.render('polls/show', { poll }),
+                    'application/json': () => res.json(poll)
+                });
+            })
             .catch(err => res.json(err));
     
     })

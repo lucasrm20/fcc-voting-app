@@ -38,14 +38,11 @@
             <h2 class="text-center">Results</h2>
             <hr>
         
-            <% poll.options.forEach(option => { %>
-                <p><%= option.description %> - <%= option.votes.length %></p>
-            <% }); %>
-            <!-- chart goes here -->
+            <div id="chart"></div>
         
         </div>
     </div>
 
 </div>
 
-<% include ../partials/footer %>
+<%- include('../partials/footer', { script: 'poll-results' }) %>
