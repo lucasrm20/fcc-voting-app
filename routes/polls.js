@@ -88,7 +88,7 @@ router.get('/:pollId/edit', auth.checkPollOwnership, (req, res) => {
 
 });
 
-router.post('/:pollId/vote', auth.isLoggedIn, (req, res) => {
+router.post('/:pollId/vote', auth.checkIfUserAlreadyVoted, (req, res) => {
     
     Poll.findById(req.params.pollId)
         .then(poll => {

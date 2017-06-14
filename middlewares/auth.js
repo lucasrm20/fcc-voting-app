@@ -39,4 +39,27 @@ function checkPollOwnership(req, res, next) {
 
 };
 
-module.exports = { isLoggedIn, provideLoggedUserForTemplates, checkPollOwnership };
+function checkIfUserAlreadyVoted(req, res, next) {
+
+    isLoggedIn(req, res, () => {
+
+        Poll.findById(req.params.pollId)
+            .then(poll => {
+
+                let userVoted = poll.options.some(option => {
+                    return option.votes.some(vote => {
+                        return vote.equals(req.user._id);
+                    });
+                });
+
+                if (userVoted) res.redirect('back');
+                else next();
+
+            })
+            .catch(err => res.json(err));
+
+    }); 
+
+};
+
+module.exports = { isLoggedIn, provideLoggedUserForTemplates, checkPollOwnership, checkIfUserAlreadyVoted };
