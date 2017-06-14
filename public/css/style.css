@@ -1,3 +1,11 @@
+body {
+    font-family: 'Lato', sans-serif;
+}
+
+.navbar {
+    border-radius: 0;
+}
+
 .extra-option {
     margin-top: 0.3em;
 }
@@ -23,4 +31,16 @@ table form {
 #chart {
     width: 100%; 
     min-height: 450px;
+}
+
+footer {
+    margin-top: 3em;
+}
+
+footer i {
+    color: #333;
+}
+
+footer i:hover {
+    color: #333C;
 }
