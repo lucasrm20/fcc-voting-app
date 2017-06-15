@@ -44,3 +44,7 @@ footer i {
 footer i:hover {
     color: #333C;
 }
+
+.jumbotron h1 {
+    font-weight: 700;
+}

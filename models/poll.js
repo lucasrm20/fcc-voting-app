@@ -20,6 +20,17 @@ const pollSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
     }
+}, {
+    timestamps: true
 });
+
+pollSchema.virtual('totalVotes')
+    .get(function() {
+
+        return this.options.reduce((total, option) => {
+            return total + option.votes.length;
+        }, 0);
+        
+    });
 
 module.exports = mongoose.model('Poll', pollSchema);
