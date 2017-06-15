@@ -3,10 +3,13 @@
 <div class="container">
 
     <div class="row">
-        <h1 class="text-center">
-            <%= poll.title %>
-            <p class="lead text-muted">by <%= poll.author.username %></p>
-        </h1>
+        <h1 class="text-center"><%= poll.title %></h1>
+        <div class="text-center">
+            <p class="text-muted">
+                by <%= poll.author.username %> - <%= new Date(poll.createdAt).toDateString() %>
+            </p>
+            <span class="label label-primary"><%= poll.totalVotes %> Votes</span>
+        </div>
         <hr>
     </div>
 
@@ -19,7 +22,7 @@
             <form action="/polls/<%= poll._id %>/vote" method="post">
                 <div class="form-group">
                     <select class="form-control input-lg" name="vote" required>
-                        <option value="" disabled="disabled" selected="selected" hidden>Choose an option... </option>
+                        <option value="" disabled="disabled" selected="selected" hidden>Choose an option...</option>
                         <% poll.options.forEach(option => { %>
                             <option value="<%= option._id %>"><%= option.description %></option>
                         <% });%>
@@ -27,9 +30,20 @@
                 </div>
 
                 <div class="form-group">
-                    <button type="submit" class="btn btn-lg btn-block btn-primary">Vote</button>
+                    <button type="submit" class="btn btn-lg btn-block btn-primary">
+                        <i class="fa fa-check" aria-hidden="true"></i> Vote
+                    </button>
                 </div>
             </form>
+
+            <div class="form-group">
+                <div class="input-group">
+                    <span class="input-group-addon">
+                        <i class="fa fa-share" aria-hidden="true"></i> Share
+                    </span>
+                    <input type="text" value="" class="form-control share" disabled>
+                </div>
+            </div>
         
         </div>
 
