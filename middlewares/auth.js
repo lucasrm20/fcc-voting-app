@@ -46,13 +46,7 @@ function checkIfUserAlreadyVoted(req, res, next) {
         Poll.findById(req.params.pollId)
             .then(poll => {
 
-                let userVoted = poll.options.some(option => {
-                    return option.votes.some(vote => {
-                        return vote.equals(req.user._id);
-                    });
-                });
-
-                if (userVoted) res.redirect('back');
+                if (poll.userVoted(req.user)) res.redirect('back');
                 else next();
 
             })
