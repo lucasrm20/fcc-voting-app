@@ -33,4 +33,16 @@ pollSchema.virtual('totalVotes')
         
     });
 
+pollSchema.methods.userVoted = function(user) {
+
+    if (!user) return false;
+
+    return this.options.some(option => {
+        return option.votes.some(vote => {
+            return vote.equals(user._id);
+        });
+    });
+
+};
+
 module.exports = mongoose.model('Poll', pollSchema);
