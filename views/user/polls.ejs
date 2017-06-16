@@ -22,6 +22,14 @@
                 </thead>
 
                 <tbody>
+                    <% if(!polls.length) { %>
+                        <tr>
+                            <td colspan="2" class="text-center">
+                                You have no polls
+                            </td>
+                        </tr>
+                    <% } %>
+
                     <% polls.forEach(poll => { %>
                         <tr>
                             <td>
