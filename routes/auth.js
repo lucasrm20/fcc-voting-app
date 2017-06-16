@@ -37,4 +37,7 @@ router.get('/logout', (req, res) => {
 router.get('/github', passport.authenticate('github'));
 router.get('/github/callback', passport.authenticate('github', { successRedirect: '/polls', failureRedirect: '/auth/login' }));
 
+router.get('/twitter', passport.authenticate('twitter'));
+router.get('/twitter/callback', passport.authenticate('twitter', { successRedirect: '/polls', failureRedirect: '/auth/login' }));
+
 module.exports = router;
