@@ -12,16 +12,16 @@ router.get('/new', auth.isLoggedIn, (req, res) => {
 });
 
 router.route('/')
-    .get((req, res) => {
+    .get((req, res, next) => {
 
         Poll.find({})
             .populate('author')
             .exec()
             .then(polls => res.render('polls/all', { polls }))
-            .catch(err => res.json(err));
+            .catch(err => next(err));
 
     })
-    .post(auth.isLoggedIn, (req, res) => {
+    .post(auth.isLoggedIn, (req, res, next) => {
 
         const newPoll = req.body.poll;
         
@@ -33,12 +33,12 @@ router.route('/')
 
         Poll.create(newPoll)
             .then(poll => res.redirect(`/polls/${poll._id}`))
-            .catch(err => res.json(err));
+            .catch(err => next(err));
 
     });
 
 router.route('/:pollId')
-    .get((req, res) => {
+    .get((req, res, next) => {
 
         Poll.findById(req.params.pollId)
             .populate('author')
@@ -49,10 +49,10 @@ router.route('/:pollId')
                     'application/json': () => res.json(poll)
                 });
             })
-            .catch(err => res.json(err));
+            .catch(err => next(err));
     
     })
-    .put(auth.checkPollOwnership, (req, res) => {
+    .put(auth.checkPollOwnership, (req, res, next) => {
 
         let newOptions = req.body.poll.options;
             
@@ -66,29 +66,29 @@ router.route('/:pollId')
                 poll.options = poll.options.concat(newOptions);
                 poll.save()
                     .then(() => res.redirect(`/polls/${poll._id}/edit`))
-                    .catch(err => res.json(err));
+                    .catch(err => next(err));
                 
             })
-            .catch(err => res.json(err));
+            .catch(err => next(err));
 
     })
-    .delete(auth.checkPollOwnership, (req, res) => {
+    .delete(auth.checkPollOwnership, (req, res, next) => {
 
         Poll.findByIdAndRemove(req.params.pollId)
             .then(() => res.redirect('back'))
-            .catch(err => res.json(err));
+            .catch(err => next(err));
 
     });
 
-router.get('/:pollId/edit', auth.checkPollOwnership, (req, res) => {
+router.get('/:pollId/edit', auth.checkPollOwnership, (req, res, next) => {
 
     Poll.findById(req.params.pollId)
         .then(poll => res.render('polls/edit', { poll }))
-        .catch(err => res.json(err));
+        .catch(err => next(err));
 
 });
 
-router.post('/:pollId/vote', auth.checkIfUserAlreadyVoted, (req, res) => {
+router.post('/:pollId/vote', auth.checkIfUserAlreadyVoted, (req, res, next) => {
     
     Poll.findById(req.params.pollId)
         .then(poll => {
@@ -100,10 +100,10 @@ router.post('/:pollId/vote', auth.checkIfUserAlreadyVoted, (req, res) => {
 
             poll.save()
                 .then(() => res.redirect(`/polls/${req.params.pollId}`))
-                .catch(err => res.json(err));
+                .catch(err => next(err));
         
         })
-        .catch(err => res.json(err));
+        .catch(err => next(err));
 });
 
 module.exports = router;

@@ -32,7 +32,7 @@ function checkPollOwnership(req, res, next) {
 
             })
             .catch(err => {
-                res.json(err);
+                next(err);
             });
 
     });
@@ -50,7 +50,7 @@ function checkIfUserAlreadyVoted(req, res, next) {
                 else next();
 
             })
-            .catch(err => res.json(err));
+            .catch(err => next(err));
 
     }); 
 

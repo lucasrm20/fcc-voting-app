@@ -13,7 +13,6 @@ router.route('/register')
         User.register({ username: req.body.username }, req.body.password, (err, user) => {
 
             if (err) {
-                console.log(err);
                 return res.redirect('/auth/register');
             }
 

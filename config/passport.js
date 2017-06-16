@@ -19,7 +19,6 @@ passport.use(new GitHubStrategy({
         User.findOrCreate({ username: profile.username }, (err, user) => {
                 
             if (err) {
-                console.log(err);
                 return done(err);
             }
 
@@ -36,7 +35,6 @@ passport.use(new TwitterStrategy({
         User.findOrCreate({ username: profile.username }, (err, user) => {
                 
             if (err) {
-                console.log(err);
                 return done(err);
             }
 
