@@ -27,11 +27,14 @@ router.route('/register')
 
 router.route('/login')
     .get((req, res) => res.render('auth/login'))
-    .post(passport.authenticate('local', { successRedirect: '/polls', failureRedirect: '/auth/login' }), (req, res) => {});
+    .post(passport.authenticate('local', { successRedirect: '/polls', failureRedirect: '/auth/login' }));
 
 router.get('/logout', (req, res) => {
     req.logout();
-    res.redirect('/polls');
+    res.redirect('/');
 });
+
+router.get('/github', passport.authenticate('github'));
+router.get('/github/callback', passport.authenticate('github', { successRedirect: '/polls', failureRedirect: '/auth/login' }));
 
 module.exports = router;
