@@ -2,6 +2,8 @@
 
 This is my solution for the FreeCodeCamp challenge [Build a Voting App](https://www.freecodecamp.com/challenges/build-a-voting-app).
 
+You can see a live version running [here](https://fcc-votingapp.glitch.me/).
+
 ### How To Run
 
   - Run `npm install` to download the dependencies;
